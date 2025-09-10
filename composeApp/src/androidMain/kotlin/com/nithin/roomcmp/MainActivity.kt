@@ -15,11 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            val database = remember {
-                getDatabaseBuilder(this).build()
-            }
-
-            App(database)
+            App()
         }
     }
 }

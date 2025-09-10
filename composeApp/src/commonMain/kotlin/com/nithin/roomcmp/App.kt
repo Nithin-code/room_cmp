@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 import room_cmp.composeapp.generated.resources.Res
 import room_cmp.composeapp.generated.resources.compose_multiplatform
@@ -35,18 +36,12 @@ import kotlin.collections.addAll
 
 @Composable
 @Preview
-fun App(database: TaskDatabase) {
+fun App(
+    taskViewModel: TaskViewModel = koinViewModel()
+) {
 
     RecomposeCounter("App")
 
-
-    val taskDao = remember {
-        database.taskDao()
-    }
-
-    val taskViewModel = remember {
-        TaskViewModel(taskDao)
-    }
 
     val taskItems by taskViewModel.taskItems.collectAsState()
 
